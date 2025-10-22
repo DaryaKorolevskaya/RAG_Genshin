@@ -1,0 +1,12 @@
+langchain
+loguru
+langchain-core
+langchain-community
+langchain_google_genai
+beautifulsoup4
+requests
+python-telegram-bot 
+tqdms
+sentence-transformers
+chromadb
+pymupdf

@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  genshin-bot:
+    build: .
+    container_name: genshin-rag-bot
+    restart: unless-stopped
+    volumes:
+      - ./data:/app/data
+      - ./vectorstore:/app/vectorstore
+      - ./logs:/app/logs
+    env_file:
+      - .env
+    environment:
+      - PYTHONPATH=/app
+      - PYTHONUNBUFFERED=1
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
