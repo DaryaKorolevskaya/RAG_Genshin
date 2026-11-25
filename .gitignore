@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.pytest_cache/
+.ruff_cache/
+
+# собранный корпус (тексты авторов канала), индекс и скачанные модели
+data/raw/
+data/qdrant/
+data/models/
+
+# история диалогов и отчёты оценки
+data/checkpoints.sqlite*
+data/eval/

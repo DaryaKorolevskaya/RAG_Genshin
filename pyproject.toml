@@ -1,0 +1,15 @@
+# Корень monorepo: uv-workspace из двух Python-сервисов. Фронтенд — отдельно, в frontend/.
+[tool.uv.workspace]
+members = ["services/rag", "services/bot"]
+
+[dependency-groups]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[tool.pytest.ini_options]
+testpaths = ["services/rag/tests", "services/bot/tests"]
+
+[tool.ruff]
+line-length = 110
+
+[tool.ruff.lint.isort]
+known-first-party = ["genshin_rag", "genshin_bot"]

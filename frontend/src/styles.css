@@ -1,0 +1,127 @@
+/* Дизайн-токены: меняешь палитру здесь — меняется весь интерфейс */
+:root {
+  --bg: #120a24;
+  --bg-2: #1d1038;
+  --card: rgba(38, 22, 70, 0.72);
+  --card-border: rgba(212, 175, 95, 0.22);
+  --user: linear-gradient(135deg, #5b2fa8, #7b3fc4);
+  --gold: #e2bf6f;
+  --gold-strong: linear-gradient(135deg, #f0d08a, #c99a3f);
+  --gold-soft: rgba(226, 191, 111, 0.14);
+  --text: #efe8fb;
+  --text-strong: #f6e3b4;
+  --muted: #a99bc6;
+  --danger: #e07a7a;
+  --radius: 18px;
+  --font-title: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; }
+
+body {
+  color: var(--text);
+  font: 15px/1.6 var(--font-body);
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(123, 63, 196, 0.35), transparent 55%),
+    radial-gradient(ellipse at 90% 100%, rgba(226, 191, 111, 0.12), transparent 50%),
+    linear-gradient(180deg, var(--bg-2), var(--bg)) fixed;
+  background-color: var(--bg);
+}
+
+button { font: inherit; cursor: pointer; }
+button:disabled { cursor: default; opacity: 0.5; }
+
+.app {
+  display: flex;
+  flex-direction: column;
+  max-width: 820px;
+  height: 100dvh;
+  margin: 0 auto;
+  padding: 20px 16px 12px;
+}
+
+/* ---------- шапка ---------- */
+.header { display: flex; gap: 14px; align-items: center; padding-bottom: 16px; border-bottom: 1px solid var(--card-border); }
+.titles { flex: 1; min-width: 0; }
+.emblem {
+  flex: none; width: 52px; height: 52px; border-radius: 50%;
+  box-shadow: 0 0 22px rgba(126, 220, 255, 0.28), 0 0 10px rgba(226, 191, 111, 0.2);
+}
+h1 { margin: 0; font: 700 30px/1.1 var(--font-title); color: var(--gold); letter-spacing: 0.02em; }
+.subtitle { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+.ghost {
+  flex: none; padding: 7px 14px; border-radius: 999px; font-size: 13px;
+  color: var(--gold); background: transparent; border: 1px solid var(--card-border);
+}
+.ghost:hover { border-color: var(--gold); }
+
+/* ---------- лента ---------- */
+.chat {
+  flex: 1; overflow-y: auto; padding: 20px 2px; display: flex; flex-direction: column; gap: 16px;
+  scrollbar-width: thin; scrollbar-color: var(--card-border) transparent;
+}
+.empty { margin: auto 0; text-align: center; }
+.empty-title { margin: 0 0 16px; font: 600 24px var(--font-title); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.chip {
+  padding: 8px 14px; border-radius: 999px; font-size: 14px; color: var(--text);
+  background: var(--gold-soft); border: 1px solid var(--card-border); transition: border-color .2s, background .2s;
+}
+.chip:hover:not(:disabled) { border-color: var(--gold); background: rgba(226, 191, 111, 0.22); }
+
+.msg { max-width: 88%; padding: 12px 16px; border-radius: var(--radius); overflow-wrap: anywhere; }
+.msg.user { align-self: flex-end; background: var(--user); border-bottom-right-radius: 6px; white-space: pre-wrap; }
+.msg.bot {
+  align-self: flex-start; min-width: 120px; background: var(--card); border: 1px solid var(--card-border);
+  border-left: 3px solid var(--gold); border-bottom-left-radius: 6px; backdrop-filter: blur(6px);
+}
+.msg.error { border-left-color: var(--danger); color: #f2c4c4; }
+.status { color: var(--muted); font-size: 13px; font-style: italic; }
+
+.markdown p { margin: 0 0 10px; }
+.markdown > :last-child { margin-bottom: 0; }
+.markdown ul, .markdown ol { margin: 0 0 10px; padding-left: 22px; }
+.markdown h1, .markdown h2, .markdown h3 { margin: 12px 0 6px; font: 600 20px var(--font-title); color: var(--gold); }
+.markdown strong { color: var(--text-strong); }
+.markdown a { color: var(--gold); }
+.markdown a.cite { font-size: 0.75em; vertical-align: super; padding: 0 1px; text-decoration: none; }
+.markdown a.cite:hover { text-decoration: underline; }
+.typing .markdown > :last-child::after { content: "▍"; color: var(--gold); animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+.sources { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--card-border); }
+.source {
+  display: inline-flex; gap: 6px; align-items: baseline; max-width: 100%; padding: 4px 10px;
+  border-radius: 999px; border: 1px solid transparent; background: var(--gold-soft);
+  color: var(--text); font-size: 12px; text-decoration: none;
+}
+a.source:hover { border-color: var(--gold); }
+.source b { color: var(--gold); }
+.source span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 260px; }
+
+/* ---------- ввод ---------- */
+.composer {
+  display: flex; gap: 10px; align-items: flex-end; padding: 10px;
+  background: var(--card); border: 1px solid var(--card-border); border-radius: var(--radius);
+}
+.composer:focus-within { border-color: var(--gold); }
+.composer textarea {
+  flex: 1; max-height: 160px; padding: 6px 4px; resize: none;
+  color: var(--text); background: transparent; border: 0; outline: 0; font: inherit;
+}
+.composer textarea::placeholder { color: var(--muted); }
+.send {
+  display: grid; place-items: center; flex: none; width: 42px; height: 42px;
+  border: 0; border-radius: 12px; color: #2a1650; background: var(--gold-strong);
+}
+.send.stop { color: var(--gold); background: transparent; border: 1px solid var(--gold); }
+.footnote { margin: 8px 0 0; text-align: center; color: var(--muted); font-size: 11.5px; }
+
+@media (max-width: 560px) {
+  h1 { font-size: 24px; }
+  .subtitle { display: none; }
+  .msg { max-width: 100%; }
+}

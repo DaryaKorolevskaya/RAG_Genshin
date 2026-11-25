@@ -1,0 +1,21 @@
+[project]
+name = "genshin-bot"
+version = "0.3.0"
+description = "Telegram-бот: тонкий клиент к RAG-сервису"
+requires-python = ">=3.12"
+dependencies = [
+    "python-telegram-bot[socks]>=21.6",  # [socks] — для прокси socks5://…
+    "httpx>=0.27",
+    "pydantic-settings>=2.4",
+    "loguru>=0.7",
+]
+
+[project.scripts]
+genshin-bot = "genshin_bot.main:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/genshin_bot"]

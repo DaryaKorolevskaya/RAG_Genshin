@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Артерии земли">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="38%" r="65%">
+      <stop offset="0" stop-color="#2e1a5c"/>
+      <stop offset="0.65" stop-color="#1a0e36"/>
+      <stop offset="1" stop-color="#0e0720"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#9eeaff" stop-opacity="0.75"/>
+      <stop offset="0.45" stop-color="#5fc8f0" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#5fc8f0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="orb" cx="42%" cy="38%" r="62%">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.35" stop-color="#e4f8ff"/>
+      <stop offset="0.75" stop-color="#a8e6fb"/>
+      <stop offset="1" stop-color="#6cc9ef"/>
+    </radialGradient>
+    <linearGradient id="stream" gradientUnits="userSpaceOnUse" x1="0" y1="126" x2="0" y2="62">
+      <stop offset="0" stop-color="#7fdcff" stop-opacity="0"/>
+      <stop offset="0.6" stop-color="#9ee8ff" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#e8faff" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a5a4a" stop-opacity="0.0"/>
+      <stop offset="1" stop-color="#1f4a3c" stop-opacity="0.9"/>
+    </linearGradient>
+    <!-- «облачный» неровный край сферы, как у потока артерий земли -->
+    <filter id="cloud" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.09" numOctaves="2" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+      <feGaussianBlur stdDeviation="0.6"/>
+    </filter>
+    <filter id="soft"><feGaussianBlur stdDeviation="1.4"/></filter>
+    <clipPath id="inside"><circle cx="64" cy="64" r="60"/></clipPath>
+  </defs>
+
+  <circle cx="64" cy="64" r="62" fill="url(#bg)"/>
+
+  <g clip-path="url(#inside)">
+    <!-- земля -->
+    <ellipse cx="64" cy="122" rx="70" ry="26" fill="url(#ground)"/>
+    <!-- световой шлейф под сферой -->
+    <path d="M44 126 L 56 70 L 72 70 L 84 126 Z" fill="url(#stream)" opacity="0.28" filter="url(#soft)"/>
+    <!-- потоки артерий, сходящиеся к сфере -->
+    <g fill="none" stroke="url(#stream)" stroke-linecap="round">
+      <path d="M14 118 C 34 104, 46 88, 58 66" stroke-width="3"/>
+      <path d="M114 118 C 94 104, 82 88, 70 66" stroke-width="3"/>
+      <path d="M40 124 C 50 108, 56 92, 61 70" stroke-width="2"/>
+      <path d="M88 124 C 78 108, 72 92, 67 70" stroke-width="2"/>
+      <path d="M64 126 L 64 72" stroke-width="2.4"/>
+    </g>
+    <!-- сияние -->
+    <circle cx="64" cy="54" r="44" fill="url(#glow)"/>
+  </g>
+
+  <!-- сфера -->
+  <g filter="url(#cloud)">
+    <circle cx="64" cy="54" r="25" fill="url(#orb)"/>
+  </g>
+  <g fill="#ffffff" opacity="0.55" filter="url(#soft)">
+    <ellipse cx="56" cy="46" rx="9" ry="6"/>
+    <ellipse cx="71" cy="60" rx="7" ry="4.5" opacity="0.6"/>
+  </g>
+
+  <!-- искры -->
+  <g fill="#e8faff">
+    <circle cx="36" cy="40" r="1.6" opacity="0.9"/>
+    <circle cx="95" cy="34" r="1.3" opacity="0.8"/>
+    <circle cx="98" cy="66" r="1.8" opacity="0.9"/>
+    <circle cx="30" cy="70" r="1.2" opacity="0.7"/>
+    <circle cx="80" cy="24" r="1" opacity="0.7"/>
+    <path d="M90 46 l1.2 3 3 1.2 -3 1.2 -1.2 3 -1.2 -3 -3 -1.2 3 -1.2z" opacity="0.95"/>
+    <path d="M40 54 l0.9 2.2 2.2 0.9 -2.2 0.9 -0.9 2.2 -0.9 -2.2 -2.2 -0.9 2.2 -0.9z" opacity="0.85"/>
+  </g>
+
+  <!-- золотое кольцо -->
+  <circle cx="64" cy="64" r="61" fill="none" stroke="#e2bf6f" stroke-width="2.5"/>
+  <circle cx="64" cy="64" r="56.5" fill="none" stroke="#e2bf6f" stroke-width="0.8" opacity="0.45"/>
+</svg>

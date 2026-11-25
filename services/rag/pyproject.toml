@@ -1,0 +1,36 @@
+[project]
+name = "genshin-rag"
+version = "0.3.0"
+description = "RAG-сервис по лору Genshin Impact: сбор корпуса, индекс Qdrant, LangGraph-пайплайн, HTTP API"
+requires-python = ">=3.12"
+dependencies = [
+    # LangChain: модели, ретривер, промпты; LangGraph: оркестрация и память диалогов
+    "langchain-core>=1.0",
+    "langchain-openai>=1.0",
+    "langchain-qdrant>=0.2",
+    "langgraph>=1.0",
+    "langgraph-checkpoint-sqlite>=2.0",
+    # Векторная БД и локальные эмбеддинги (ONNX, без PyTorch)
+    "qdrant-client[fastembed]>=1.12",
+    # У onnxruntime >=1.24 нет сборок под Intel-Mac
+    "onnxruntime<1.24; sys_platform == 'darwin' and platform_machine == 'x86_64'",
+    # Сбор данных
+    "httpx>=0.27",
+    "selectolax>=0.3.21",
+    "pypdf>=5.0",
+    # API
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "pydantic-settings>=2.4",
+    "loguru>=0.7",
+]
+
+[project.scripts]
+genshin = "genshin_rag.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/genshin_rag"]
